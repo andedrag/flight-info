@@ -20,6 +20,8 @@ public class DataAccess {
 	private static final String DB_USER = "root";
 	private static final String DB_PWD = "root";
 	private final Connection connection;
+
+	// TODO Paraméterek értéke @Value-val jöjjön (application.porperties)
 	
 	
 	public DataAccess() throws SQLException {
@@ -31,7 +33,8 @@ public class DataAccess {
 	}
 
 	public Pilot getPilotByName(String pilotName) throws SQLException { // TODO még nincs felkészítve több találatra, pedig név alapján lehet több találat is
-		
+		// TODO Service-ben hívjam meg ezt, és akkor lehet az innen kapott ID-t használni
+
 		Pilot pilot = null;
 		
 		PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM pilot WHERE name = ?");
@@ -86,7 +89,7 @@ public class DataAccess {
 	}
 
 	public String getTotalFlightTime(String pilotName) {
-		//TODO Ez a Service-be való
+		//TODO Ne itt adjam össze, csak adja vissza a Service-nek az összeadnivalót (erre elég a fenti függvény) és a service sumolja
 
 		//TODO
 		return "ide jön a total flight time majd";

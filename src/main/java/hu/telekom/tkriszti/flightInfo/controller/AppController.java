@@ -1,9 +1,8 @@
 package hu.telekom.tkriszti.flightInfo.controller;
 
 import java.sql.SQLException;
-
 import hu.telekom.tkriszti.flightInfo.dto.PilotDTO;
-import hu.telekom.tkriszti.flightInfo.service.ServiceImpl;
+import hu.telekom.tkriszti.flightInfo.service.PilotInfoServiceDbImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,10 +12,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class AppController {
 	
-	private final ServiceImpl service;
+	private final PilotInfoServiceDbImpl service;
 	
 	@Autowired
-	public AppController(ServiceImpl service) {
+	public AppController(PilotInfoServiceDbImpl service) {
 		super();
 		this.service = service;
 	}
@@ -30,7 +29,7 @@ public class AppController {
 		model.addAttribute("pilot", pilotDto); // TODO átnézni, hogy itt mi tötrténik
 		return "user.html"; //TODO Ezt a html-t nem kéne megírni?
 	}
-	}
+}
 
 
 

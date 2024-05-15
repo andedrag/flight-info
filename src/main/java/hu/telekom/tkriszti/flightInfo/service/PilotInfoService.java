@@ -6,7 +6,7 @@ import hu.telekom.tkriszti.flightInfo.model.Pilot;
 import java.sql.SQLException;
 import java.util.List;
 
-interface Service {
+interface PilotInfoService {
     Pilot findPilotByName(String pilotName) throws SQLException;
 
     List<Flight> listFlightsByPilot(String pilotName) throws SQLException;

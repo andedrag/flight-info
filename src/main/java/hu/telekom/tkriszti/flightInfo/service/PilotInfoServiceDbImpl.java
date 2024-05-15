@@ -1,7 +1,5 @@
 package hu.telekom.tkriszti.flightInfo.service;
 
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 import hu.telekom.tkriszti.flightInfo.dao.DataAccess;
@@ -11,12 +9,12 @@ import hu.telekom.tkriszti.flightInfo.model.Flight;
 import org.springframework.beans.factory.annotation.Autowired;
 
 @org.springframework.stereotype.Service
-public class ServiceImpl implements Service {
+public class PilotInfoServiceDbImpl implements PilotInfoService {
 	
 	private final DataAccess dao;
 	
 	@Autowired
-	public ServiceImpl(DataAccess dao) {
+	public PilotInfoServiceDbImpl(DataAccess dao) {
 		this.dao = dao;
 	}
 	// TODO Kérdés: Hogyan tud ide a DAO paraméterként "megérkezni"? A COntrollerben pl. úgy példányosodik, hogy nincs dao paramétere (látszólag)

@@ -7,7 +7,7 @@ public class Pilot {
 	private final int Id;
 	private String name;
 	private final Date birthDate; //LocalDate-et használtam először, de úgy a DAO-ban nem tudom hivatkozni (nincs a resultSetre getLocalDate)
-	private int phoneNumber;
+	private int phoneNumber; // TODO túlcsordul!! String(?)
 	private int licenseYear;
 
 	public Pilot(int Id, String name, Date birthDate, int phoneNumber, int licenseYear) {

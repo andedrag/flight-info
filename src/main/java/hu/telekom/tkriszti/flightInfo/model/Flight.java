@@ -2,8 +2,8 @@ package hu.telekom.tkriszti.flightInfo.model;
 
 public class Flight {
 	private final int Id;
-	private final int pilot1Id;
-	private final int pilot2Id;
+	private final int pilot1Id; // TODO Pilot lesz, JPA oldaja fel, hogy majd id legyen (?)
+	private final int pilot2Id; // TODO Pilot lesz, JPA oldaja fel, hogy majd id legyen (?)
 	private final String countryFrom;
 	private final String countryTo;
 	private final Integer flightTime;
