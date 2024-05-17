@@ -6,9 +6,9 @@ public class Flight {
 	private final int pilot2Id; // TODO Pilot lesz, JPA oldaja fel, hogy majd id legyen (?)
 	private final String countryFrom;
 	private final String countryTo;
-	private final Integer flightTime;
+	private final int flightTime; // minutes
 
-	public Flight(int Id, int pilot1Id, int pilot2Id, String countryFrom, String countryTo, Integer flightTime) {
+	public Flight(int Id, int pilot1Id, int pilot2Id, String countryFrom, String countryTo, java.lang.Integer flightTime) {
 		this.Id = Id;
 		this.pilot1Id = pilot1Id;
 		this.pilot2Id = pilot2Id;
@@ -37,7 +37,7 @@ public class Flight {
 		return countryTo;
 	}
 
-	public Integer getFlightTime() {
+	public java.lang.Integer getFlightTime() {
 		return flightTime;
 	}
 

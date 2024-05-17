@@ -7,10 +7,10 @@ public class Pilot {
 	private final int Id;
 	private String name;
 	private final Date birthDate; //LocalDate-et használtam először, de úgy a DAO-ban nem tudom hivatkozni (nincs a resultSetre getLocalDate)
-	private int phoneNumber; // TODO túlcsordul!! String(?)
+	private String phoneNumber;
 	private int licenseYear;
 
-	public Pilot(int Id, String name, Date birthDate, int phoneNumber, int licenseYear) {
+	public Pilot(int Id, String name, Date birthDate, String phoneNumber, int licenseYear) {
 		this.Id = Id;
 		this.name = name;
 		this.birthDate = birthDate;
@@ -34,11 +34,11 @@ public class Pilot {
 		return birthDate;
 	}
 
-	public int getPhoneNumber() {
+	public String getPhoneNumber() {
 		return phoneNumber;
 	}
 
-	public void setPhoneNumber(int phoneNumber) {
+	public void setPhoneNumber(String phoneNumber) {
 		this.phoneNumber = phoneNumber;
 	}
 

@@ -5,13 +5,12 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import hu.telekom.tkriszti.flightInfo.model.Flight;
 import hu.telekom.tkriszti.flightInfo.model.Pilot;
 import org.springframework.stereotype.Repository;
-import org.yaml.snakeyaml.events.Event;
-
 
 @Repository
 public class DataAccess {
@@ -48,53 +47,40 @@ public class DataAccess {
 					resultSet.getInt("Id"),
 					resultSet.getString("name"), //TODO Kérdés: Mindegy, hogy ezt írom vagy a paraméterként kapott pilotName-et?
 					resultSet.getDate("birthday"),
-					resultSet.getInt("phoneNumber"),
+					resultSet.getString("phoneNumber"),
 					resultSet.getInt("licenseYear")
 					);
 		}			
 		resultSet.close();
 		preparedStatement.close();
-		return pilot;
+		return pilot; // TODO null kezelése
 	}
 
-	public List<Flight> getFlightsByPilot (String pilotName) throws SQLException {
-		//TODO Ez a Service-be való
+	public List<Flight> getFlightsByPilotId (int pilotId) throws SQLException {
 
-		List<Flight> flights = null;
-		Flight flight = null;
-		
-		PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM flight INNER JOIN pilot ON flight.Pilot1Id=pilot.Id WHERE pilot.name = ?");
-		// TODO Mindkét pilotId-t ellenőrizni kellene - hogyan?
-		preparedStatement.setString(1, "pilotName");
+		List<Flight> flights = new ArrayList<>();
+
+		PreparedStatement preparedStatement = connection.prepareStatement("(SELECT * FROM flight INNER JOIN pilot ON flight.Pilot1Id=pilot.Id WHERE pilot.Id = ?) UNION (SELECT * FROM flight INNER JOIN pilot ON flight.Pilot2Id=pilot.Id WHERE pilot.Id = ?)");
+		preparedStatement.setInt(1, pilotId);
+		preparedStatement.setInt(2, pilotId);
 
 		ResultSet resultSet = preparedStatement.executeQuery();
 
-		if(resultSet.next()) { // TODO iterálni kell (de while-ban hogyan tudok új változóneveket generálni?)
-
-			//TODO
-			flight = new Flight(
+		while(resultSet.next()) {
+			Flight flight = new Flight(
 					resultSet.getInt("Id"),
 					resultSet.getInt("pilot1Id"),
 					resultSet.getInt("pilot2Id"),
 					resultSet.getString("countryFrom"),
 					resultSet.getString("countryTo"),
 					resultSet.getInt("flightTime")
-					);
+			);
 			flights.add(flight);
 		}
-
 		resultSet.close();
 		preparedStatement.close();
-		return flights; // TODO esetleges nullokat kezelni
+		return flights;
 	}
-
-	public String getTotalFlightTime(String pilotName) {
-		//TODO Ne itt adjam össze, csak adja vissza a Service-nek az összeadnivalót (erre elég a fenti függvény) és a service sumolja
-
-		//TODO
-		return "ide jön a total flight time majd";
-	}
-	
 }
 
 

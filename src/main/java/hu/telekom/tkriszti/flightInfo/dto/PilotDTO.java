@@ -8,10 +8,10 @@ import java.util.List;
 public class PilotDTO {
 	
 	private Pilot pilotData; // TODO Nem hazsnálhatja a PIlotot. A service tud mappaleni Model és DTO közöt, de ezek nem hazsnálják egymást
-	private List<Flight> flightsByPilot; // TODO Nem hazsnálhatja a Flightot. A service tud mappaleni Model és DTO közöt, de ezek nem hazsnálják egymást
+	private List<Integer> flightsByPilot; // TODO Nem hazsnálhatja a Flightot. A service tud mappaleni Model és DTO közöt, de ezek nem hazsnálják egymást
 	private String totalFlightTime; // TODO Ne legyen String, maradjon percben megadva. Majd a UI kitalálja, hogyan akarja megjeleníteni
 
-	public PilotDTO(Pilot pilotData, List<Flight> flightsByPilot, String totalFlightTime) {
+	public PilotDTO(Pilot pilotData, List<Integer> flightsByPilot, String totalFlightTime) {
 		this.pilotData = pilotData;
 		this.flightsByPilot = flightsByPilot;
 		this.totalFlightTime = totalFlightTime;
@@ -25,11 +25,11 @@ public class PilotDTO {
 		this.pilotData = pilotData;
 	}
 
-	public List<Flight> getFlightsByPilot() {
+	public List<Integer> getFlightsByPilot() {
 		return flightsByPilot;
 	}
 
-	public void setFlightsByPilot(List<Flight> flightsByPilot) {
+	public void setFlightsByPilot(List<Integer> flightsByPilot) {
 		this.flightsByPilot = flightsByPilot;
 	}
 
