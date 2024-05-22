@@ -2,13 +2,13 @@ package hu.telekom.tkriszti.flightInfo.model;
 
 public class Flight {
 	private final int Id;
-	private final int pilot1Id; // TODO Pilot lesz, JPA oldaja fel, hogy majd id legyen (?)
-	private final int pilot2Id; // TODO Pilot lesz, JPA oldaja fel, hogy majd id legyen (?)
-	private final String countryFrom;
-	private final String countryTo;
+	private final int pilot1Id;
+	private final int pilot2Id;
+	private final int countryFrom;
+	private final int countryTo;
 	private final int flightTime; // minutes
 
-	public Flight(int Id, int pilot1Id, int pilot2Id, String countryFrom, String countryTo, java.lang.Integer flightTime) {
+	public Flight(int Id, int pilot1Id, int pilot2Id, int countryFrom, int countryTo, java.lang.Integer flightTime) {
 		this.Id = Id;
 		this.pilot1Id = pilot1Id;
 		this.pilot2Id = pilot2Id;
@@ -29,11 +29,11 @@ public class Flight {
 		return pilot2Id;
 	}
 
-	public String getCountryFrom() {
+	public int getCountryFrom() {
 		return countryFrom;
 	}
 
-	public String getCountryTo() {
+	public int getCountryTo() {
 		return countryTo;
 	}
 

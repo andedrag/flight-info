@@ -6,11 +6,11 @@ import java.util.Date;
 public class Pilot {
 	private final int Id;
 	private String name;
-	private final Date birthDate; //LocalDate-et használtam először, de úgy a DAO-ban nem tudom hivatkozni (nincs a resultSetre getLocalDate)
+	private final LocalDate birthDate;
 	private String phoneNumber;
 	private int licenseYear;
 
-	public Pilot(int Id, String name, Date birthDate, String phoneNumber, int licenseYear) {
+	public Pilot(int Id, String name, LocalDate birthDate, String phoneNumber, int licenseYear) {
 		this.Id = Id;
 		this.name = name;
 		this.birthDate = birthDate;
@@ -30,7 +30,7 @@ public class Pilot {
 		this.name = name;
 	}
 
-	public Date getBirthDate() {
+	public LocalDate getBirthDate() {
 		return birthDate;
 	}
 

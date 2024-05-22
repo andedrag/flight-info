@@ -1,7 +1,7 @@
 package hu.telekom.tkriszti.flightInfo.controller;
 
 import java.sql.SQLException;
-import hu.telekom.tkriszti.flightInfo.dto.PilotDTO;
+import hu.telekom.tkriszti.flightInfo.dto.ResultDTO;
 import hu.telekom.tkriszti.flightInfo.service.PilotInfoServiceDbImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,12 +20,14 @@ public class AppController {
 		this.service = service;
 	}
 
-	@GetMapping("/pilot/{name}")
+	// localhost:8080/pilot/kapitanyjanos --> pathvariable-ös annotáció
+	// localhost:8080/pilot?name=kapitanyjanos --> @RequestParam
+	@GetMapping("/pilot")
 	public String showPilotData(
-				Model model,
-				@RequestParam("name") String name // TODO Kérdés: Hogyan működik a @RequestParam?
+			Model model,
+			@RequestParam("name") String name // TODO Kérdés: Hogyan működik a @RequestParam?
 			) throws SQLException {
-		PilotDTO pilotDto = service.getPilotData(name);
+		ResultDTO pilotDto = service.getPilotData(name);
 		model.addAttribute("pilot", pilotDto); // TODO átnézni, hogy itt mi tötrténik
 		return "user.html"; //TODO Ezt a html-t nem kéne megírni?
 	}

@@ -5,7 +5,10 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import hu.telekom.tkriszti.flightInfo.model.Flight;
@@ -32,7 +35,6 @@ public class DataAccess {
 	}
 
 	public Pilot getPilotByName(String pilotName) throws SQLException { // TODO még nincs felkészítve több találatra, pedig név alapján lehet több találat is
-		// TODO Service-ben hívjam meg ezt, és akkor lehet az innen kapott ID-t használni
 
 		Pilot pilot = null;
 		
@@ -43,13 +45,16 @@ public class DataAccess {
 
 		if(resultSet.next())
 		{
+			Date bDay = resultSet.getDate("birthday");
+			LocalDate birthDay = bDay.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+
 			pilot = new Pilot( // TODO Kérdés: Miért csinálok belőle minden alkalommal, amikor megtalálja, egy új objektumot? (A mintakódban is így volt)
 					resultSet.getInt("Id"),
 					resultSet.getString("name"), //TODO Kérdés: Mindegy, hogy ezt írom vagy a paraméterként kapott pilotName-et?
-					resultSet.getDate("birthday"),
+					birthDay,
 					resultSet.getString("phoneNumber"),
 					resultSet.getInt("licenseYear")
-					);
+				);
 		}			
 		resultSet.close();
 		preparedStatement.close();
@@ -60,7 +65,7 @@ public class DataAccess {
 
 		List<Flight> flights = new ArrayList<>();
 
-		PreparedStatement preparedStatement = connection.prepareStatement("(SELECT * FROM flight INNER JOIN pilot ON flight.Pilot1Id=pilot.Id WHERE pilot.Id = ?) UNION (SELECT * FROM flight INNER JOIN pilot ON flight.Pilot2Id=pilot.Id WHERE pilot.Id = ?)");
+		PreparedStatement preparedStatement = connection.prepareStatement("(SELECT * FROM flights WHERE pilot1id = ? OR pilot2id = ?)");
 		preparedStatement.setInt(1, pilotId);
 		preparedStatement.setInt(2, pilotId);
 
@@ -71,8 +76,8 @@ public class DataAccess {
 					resultSet.getInt("Id"),
 					resultSet.getInt("pilot1Id"),
 					resultSet.getInt("pilot2Id"),
-					resultSet.getString("countryFrom"),
-					resultSet.getString("countryTo"),
+					resultSet.getInt("countryFrom"),
+					resultSet.getInt("countryTo"),
 					resultSet.getInt("flightTime")
 			);
 			flights.add(flight);
