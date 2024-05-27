@@ -1,15 +1,18 @@
 package hu.telekom.tkriszti.flightInfo.service;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.stream.Collectors;
+
 import hu.telekom.tkriszti.flightInfo.dao.DataAccess;
 import hu.telekom.tkriszti.flightInfo.dto.ResultDTO;
 import hu.telekom.tkriszti.flightInfo.model.Flight;
 import hu.telekom.tkriszti.flightInfo.model.Pilot;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
-@org.springframework.stereotype.Service
+@Service
 public class PilotInfoServiceDbImpl implements PilotInfoService {
 	
 	private final DataAccess dao;
@@ -25,12 +28,12 @@ public class PilotInfoServiceDbImpl implements PilotInfoService {
 		int licenseYear = pilot.getLicenseYear();
 
 		List<Flight> flights = dao.getFlightsByPilotId(pilot.getId());
-		List<Integer> flightIds = new ArrayList<>();
+		List<Integer> flightIds = flights.stream().map(Flight::getID).collect(Collectors.toCollection(LinkedList::new));
 		int sumOfFlightTime = 0;
-		for (int i = 0; i < flights.size(); i++) {
+		for (int i = 0; i < flights.size(); i++) { // TODO átírni a stream birtokában
 			Flight currentFlight = flights.get(i);
 			flightIds.add(currentFlight.getID());
-			sumOfFlightTime += currentFlight.getFlightTime();
+			sumOfFlightTime += currentFlight.getFlightTime(); // TODO privát függvénybe kiemelni
 		}
 
 		ResultDTO resultDTO = new ResultDTO(pilotName, licenseYear, flightIds, sumOfFlightTime);
