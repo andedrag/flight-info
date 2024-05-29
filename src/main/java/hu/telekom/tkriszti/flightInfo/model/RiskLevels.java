@@ -1,6 +1,11 @@
 package hu.telekom.tkriszti.flightInfo.model;
 
 public enum RiskLevels {
+    LOWEST,
+    LOWER,
     LOW,
-    HIGH
+    MEDIUM,
+    HIGH,
+    HIGHER,
+    CRITICAL
 }

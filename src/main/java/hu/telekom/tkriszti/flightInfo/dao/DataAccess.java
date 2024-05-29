@@ -38,22 +38,25 @@ public class DataAccess {
 
 		Pilot pilot = null;
 		
-		PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM pilot WHERE name = ?");
+		PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM pilots WHERE name = ?");
 		preparedStatement.setString(1, pilotName);
 		
 		ResultSet resultSet = preparedStatement.executeQuery();
 
 		if(resultSet.next())
 		{
-			Date bDay = resultSet.getDate("birthday");
-			LocalDate birthDay = bDay.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+			Date bDay = resultSet.getDate("birthdate");
+			System.out.println(bDay);
+			//LocalDate birthDay = bDay.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+			//LocalDate birthDay = bDay.toLocalDate();
+			LocalDate birthDay = LocalDate.parse(bDay.toString());
 
 			pilot = new Pilot( // TODO Kérdés: Miért csinálok belőle minden alkalommal, amikor megtalálja, egy új objektumot? (A mintakódban is így volt)
-					resultSet.getInt("Id"),
+					resultSet.getInt("id"),
 					resultSet.getString("name"), //TODO Kérdés: Mindegy, hogy ezt írom vagy a paraméterként kapott pilotName-et?
 					birthDay,
-					resultSet.getString("phoneNumber"),
-					resultSet.getInt("licenseYear")
+					resultSet.getString("phonenr"),
+					resultSet.getInt("licenseyear")
 				);
 		}			
 		resultSet.close();
