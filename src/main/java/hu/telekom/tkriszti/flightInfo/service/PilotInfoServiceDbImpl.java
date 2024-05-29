@@ -26,18 +26,19 @@ public class PilotInfoServiceDbImpl implements PilotInfoService {
 	public ResultDTO getPilotData(String pilotName) throws SQLException {
 		Pilot pilot = dao.getPilotByName(pilotName);
 		int licenseYear = pilot.getLicenseYear();
-
 		List<Flight> flights = dao.getFlightsByPilotId(pilot.getId());
 		List<Integer> flightIds = flights.stream().map(Flight::getID).collect(Collectors.toCollection(LinkedList::new));
-		int sumOfFlightTime = 0;
-		for (int i = 0; i < flights.size(); i++) { // TODO átírni a stream birtokában
-			Flight currentFlight = flights.get(i);
-			flightIds.add(currentFlight.getID());
-			sumOfFlightTime += currentFlight.getFlightTime(); // TODO privát függvénybe kiemelni
-		}
+		int sumOfFlightTime = getSumOfFlightTime(flights);
+		return new ResultDTO(pilotName, licenseYear, flightIds, sumOfFlightTime);
+	}
 
-		ResultDTO resultDTO = new ResultDTO(pilotName, licenseYear, flightIds, sumOfFlightTime);
-		return resultDTO;
+	private static int getSumOfFlightTime(List<Flight> flights) {
+		int sumOfFlightTime = 0;
+		for (int i = 0; i < flights.size(); i++) {
+			Flight currentFlight = flights.get(i);
+			sumOfFlightTime += currentFlight.getFlightTime();
+		}
+		return sumOfFlightTime;
 	}
 }
 
