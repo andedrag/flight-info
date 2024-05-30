@@ -4,12 +4,12 @@ import hu.telekom.tkriszti.flightInfo.model.Pilot;
 
 import java.util.List;
 
-public class ResultDTO {
+public final class ResultDTO {
 	
-	private String pilotName;
-	private int pilotLicenceYear;
-	private List<Integer> flightsByPilot;
-	private int totalFlightTime;
+	private final String pilotName;
+	private final int pilotLicenceYear;
+	private final List<Integer> flightsByPilot;
+	private final int totalFlightTime;
 
 	public ResultDTO(String pilotName, int pilotLicenceYear, List<Integer> flightsByPilot, int totalFlightTime) {
 		this.pilotName = pilotName;
@@ -22,32 +22,16 @@ public class ResultDTO {
 		return pilotName;
 	}
 
-	public void setPilotName(String pilotName) {
-		this.pilotName = pilotName;
-	}
-
 	public int getPilotLicenceYear() {
 		return pilotLicenceYear;
-	}
-
-	public void setPilotLicenceYear(int pilotLicenceYear) {
-		this.pilotLicenceYear = pilotLicenceYear;
 	}
 
 	public List<Integer> getFlightsByPilot() {
 		return flightsByPilot;
 	}
 
-	public void setFlightsByPilot(List<Integer> flightsByPilot) {
-		this.flightsByPilot = flightsByPilot;
-	}
-
 	public int getTotalFlightTime() {
 		return totalFlightTime;
-	}
-
-	public void setTotalFlightTime(int totalFlightTime) {
-		this.totalFlightTime = totalFlightTime;
 	}
 
 	@Override
