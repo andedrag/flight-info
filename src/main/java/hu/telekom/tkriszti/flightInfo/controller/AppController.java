@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class AppController {
 	
 	private final PilotInfoServiceDbImpl service;
-	
+
 	@Autowired
 	public AppController(PilotInfoServiceDbImpl service) {
 		super();
@@ -25,11 +25,12 @@ public class AppController {
 	@GetMapping("/pilot")
 	public String showPilotData(
 			Model model,
-			@RequestParam("name") String name // TODO Kérdés: Hogyan működik a @RequestParam?
+			@RequestParam("name") String name
 			) throws SQLException {
 		ResultDTO pilotDto = service.getPilotData(name);
-		model.addAttribute("pilot", pilotDto); // TODO átnézni, hogy itt mi tötrténik
-		return "user.html"; //TODO Ezt a html-t nem kéne megírni?
+		//System.out.println(pilotDto);
+		model.addAttribute("pilot", pilotDto);
+		return "user.html";
 	}
 }
 
