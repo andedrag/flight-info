@@ -8,7 +8,7 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.ArrayList;
-import java.util.Date;
+import java.sql.Date;
 import java.util.List;
 
 import hu.telekom.tkriszti.flightInfo.model.Flight;
@@ -23,9 +23,6 @@ public class DataAccess {
 	private static final String DB_PWD = "root";
 	private final Connection connection;
 
-	// TODO Paraméterek értéke @Value-val jöjjön (application.porperties)
-	
-	
 	public DataAccess() throws SQLException {
 		this.connection = DriverManager.getConnection(DB_URL,DB_USER,DB_PWD);
 	}
@@ -38,21 +35,21 @@ public class DataAccess {
 
 		Pilot pilot = null;
 		
-		PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM pilot WHERE name = ?");
+		PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM pilots WHERE name = ?");
 		preparedStatement.setString(1, pilotName);
 		
 		ResultSet resultSet = preparedStatement.executeQuery();
 
 		if(resultSet.next())
 		{
-			Date bDay = resultSet.getDate("birthday");
-			LocalDate birthDay = bDay.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-
-			pilot = new Pilot( // TODO Kérdés: Miért csinálok belőle minden alkalommal, amikor megtalálja, egy új objektumot? (A mintakódban is így volt)
+			Date bDay = resultSet.getDate("birthdate");
+			// LocalDate birthDay = bDay.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+			LocalDate birthDay = bDay.toLocalDate();
+			pilot = new Pilot(
 					resultSet.getInt("Id"),
-					resultSet.getString("name"), //TODO Kérdés: Mindegy, hogy ezt írom vagy a paraméterként kapott pilotName-et?
+					resultSet.getString("name"),
 					birthDay,
-					resultSet.getString("phoneNumber"),
+					resultSet.getString("phoneNr"),
 					resultSet.getInt("licenseYear")
 				);
 		}			
