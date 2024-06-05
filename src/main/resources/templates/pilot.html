@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Pilóta adatok</title>
+</head>
+
+<body>
+
+<h1>Pilóta adatok</h1>
+<table>
+    <tr>
+        <th>Név</th>
+        <th>Jogosítvány éve</th>
+        <th>Járatok</th>
+        <th>Össz.repülési idő (perc)</th>
+    </tr>
+    <tr th:each="pilot : ${pilots}">
+        <td th:text="${pilot.name}">DefaultDani</td>
+        <td th:text="${pilot.licenseyear}">1900</td>
+        <td th:text="${pilot.flights}">11,22,44,77</td>
+        <td th:text="${pilot.flighttime}">4444</td>
+    </tr>
+</table>
+</body>
+</html>
