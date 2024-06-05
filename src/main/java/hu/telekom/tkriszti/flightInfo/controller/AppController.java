@@ -18,7 +18,6 @@ public class AppController {
 	public AppController(PilotInfoServiceDbImpl service) {
 		super();
 		this.service = service;
-		System.out.println("Controller Constructor");
 	}
 
 	// localhost:8080/pilot/kapitanyjanos --> pathvariable-ös annotáció
@@ -28,7 +27,6 @@ public class AppController {
 			Model model,
 			@RequestParam("name") String name
 			) throws SQLException {
-		System.out.println(name);
 		ResultDTO pilotDto = service.getPilotData(name);
 		model.addAttribute("pilot", pilotDto);
 		return "pilot.html";

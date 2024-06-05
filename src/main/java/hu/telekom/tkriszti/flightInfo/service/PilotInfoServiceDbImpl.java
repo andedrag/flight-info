@@ -24,7 +24,6 @@ public class PilotInfoServiceDbImpl implements PilotInfoService {
 
 	@Override
 	public ResultDTO getPilotData(String pilotName) throws SQLException {
-		System.out.println("APPS START");
 		Pilot pilot = dao.getPilotByName(pilotName);
 		int licenseYear = pilot.getLicenseYear();
 
@@ -32,10 +31,7 @@ public class PilotInfoServiceDbImpl implements PilotInfoService {
 		List<Integer> flightIds = flights.stream().map(Flight::getID).collect(Collectors.toCollection(LinkedList::new));
 		int sumOfFlightTime = getSumOfFlightTime(flights);
 
-		System.out.println("APPS FINISH");
-		ResultDTO dto = new ResultDTO(pilotName, licenseYear, flightIds, sumOfFlightTime);
-		System.out.println(dto);
-		return dto;
+        return new ResultDTO(pilotName, licenseYear, flightIds, sumOfFlightTime);
 	}
 
 	private static int getSumOfFlightTime(List<Flight> flights) {
