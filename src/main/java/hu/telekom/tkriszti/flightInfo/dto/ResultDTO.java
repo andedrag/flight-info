@@ -8,8 +8,8 @@ public class ResultDTO {
 	
 	private String pilotName;
 	private int pilotLicenceYear;
-	private List<Integer> flightsByPilot; // TODO Nem hazsnálhatja a Flightot. A service tud mappaleni Model és DTO közöt, de ezek nem hazsnálják egymást
-	private int totalFlightTime; // TODO Ne legyen String, maradjon percben megadva. Majd a UI kitalálja, hogyan akarja megjeleníteni
+	private List<Integer> flightsByPilot;
+	private int totalFlightTime; //minutes
 
 	public ResultDTO(String pilotName, int pilotLicenceYear, List<Integer> flightsByPilot, int totalFlightTime) {
 		this.pilotName = pilotName;
@@ -52,6 +52,6 @@ public class ResultDTO {
 
 	@Override
 	public String toString() {
-		return String.format(pilotName + " " + pilotLicenceYear +"%n%n" + flightsByPilot + "%n%n" + totalFlightTime + "%n%n");
+		return String.format(pilotName + " " + pilotLicenceYear +" Flights: " + flightsByPilot + " " + totalFlightTime + " minutes");
 	}
 }

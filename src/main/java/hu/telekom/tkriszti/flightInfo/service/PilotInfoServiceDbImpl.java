@@ -29,15 +29,18 @@ public class PilotInfoServiceDbImpl implements PilotInfoService {
 
 		List<Flight> flights = dao.getFlightsByPilotId(pilot.getId());
 		List<Integer> flightIds = flights.stream().map(Flight::getID).collect(Collectors.toCollection(LinkedList::new));
-		int sumOfFlightTime = 0;
-		for (int i = 0; i < flights.size(); i++) { // TODO átírni a stream birtokában
-			Flight currentFlight = flights.get(i);
-			flightIds.add(currentFlight.getID());
-			sumOfFlightTime += currentFlight.getFlightTime(); // TODO privát függvénybe kiemelni
-		}
+		int sumOfFlightTime = getSumOfFlightTime(flights);
 
-		ResultDTO resultDTO = new ResultDTO(pilotName, licenseYear, flightIds, sumOfFlightTime);
-		return resultDTO;
+		return new ResultDTO(pilotName, licenseYear, flightIds, sumOfFlightTime);
+	}
+
+	private static int getSumOfFlightTime(List<Flight> flights) {
+		int sumOfFlightTime = 0;
+		for (int i = 0; i < flights.size(); i++) {
+			Flight currentFlight = flights.get(i);
+			sumOfFlightTime += currentFlight.getFlightTime();
+		}
+		return sumOfFlightTime;
 	}
 }
 
