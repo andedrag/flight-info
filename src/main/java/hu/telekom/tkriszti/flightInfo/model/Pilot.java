@@ -1,13 +1,23 @@
 package hu.telekom.tkriszti.flightInfo.model;
 
+import jakarta.persistence.*;
+
 import java.time.LocalDate;
 import java.util.Date;
-
+@Entity
+@Table(name = "pilots")
 public class Pilot {
+	@Id
+	@Column(name = "id")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private final int Id;
+	@Column(name = "name")
 	private String name;
+	@Column(name = "birthdate")
 	private final LocalDate birthDate;
+	@Column(name = "phonenr")
 	private String phoneNumber;
+	@Column(name = "licenseyear")
 	private int licenseYear;
 
 	public Pilot(int Id, String name, LocalDate birthDate, String phoneNumber, int licenseYear) {
