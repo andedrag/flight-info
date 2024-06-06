@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class AppController {
 	
 	private final PilotInfoServiceDbImpl service;
-	
+
 	@Autowired
 	public AppController(PilotInfoServiceDbImpl service) {
 		super();
@@ -31,19 +31,4 @@ public class AppController {
 		model.addAttribute("pilot", pilotDto);
 		return "pilot.html";
 	}
-
-
 }
-
-
-
-
-
-
-
-
-
-
-
-
-

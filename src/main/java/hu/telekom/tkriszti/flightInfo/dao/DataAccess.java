@@ -62,7 +62,8 @@ public class DataAccess {
 //		}
 //		resultSet.close();
 //		preparedStatement.close();
-		/** Open Session and Begin Transaction */
+    
+    /** Open Session and Begin Transaction */
 		Session session = sessionFactory.openSession();
 		Transaction transaction = session.beginTransaction();
 		/** Perform SELECT operation */
@@ -70,6 +71,7 @@ public class DataAccess {
 		/** Execute transaction and Close Session */
 		transaction.commit();
 		session.close();
+
 		return pilot; // TODO null kezelése
 	}
 
@@ -107,34 +109,3 @@ public class DataAccess {
 		return flights;
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

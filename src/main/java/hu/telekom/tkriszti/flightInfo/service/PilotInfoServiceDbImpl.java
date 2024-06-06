@@ -26,12 +26,11 @@ public class PilotInfoServiceDbImpl implements PilotInfoService {
 	public ResultDTO getPilotData(String pilotName) throws SQLException {
 		Pilot pilot = dao.getPilotByName(pilotName);
 		int licenseYear = pilot.getLicenseYear();
-
 		List<Flight> flights = dao.getFlightsByPilotId(pilot.getId());
 		List<Integer> flightIds = flights.stream().map(Flight::getID).collect(Collectors.toCollection(LinkedList::new));
 		int sumOfFlightTime = getSumOfFlightTime(flights);
 
-        return new ResultDTO(pilotName, licenseYear, flightIds, sumOfFlightTime);
+		return new ResultDTO(pilotName, licenseYear, flightIds, sumOfFlightTime);
 	}
 
 	private static int getSumOfFlightTime(List<Flight> flights) {
