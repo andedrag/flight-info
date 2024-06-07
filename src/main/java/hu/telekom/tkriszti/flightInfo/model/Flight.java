@@ -1,10 +1,21 @@
 package hu.telekom.tkriszti.flightInfo.model;
 
+import jakarta.persistence.*;
+
+@Entity
+@Table(name = "flights")
 public class Flight {
+	@Id
+	@Column(name = "id")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private final int Id;
+	@Column(name = "pilot1id")
 	private final int pilot1Id;
+	@Column(name = "pilot2id")
 	private final int pilot2Id;
+	@Column(name = "countryfrom")
 	private final int countryFrom;
+	@Column(name = "countryto")
 	private final int countryTo;
 	private final int flightTime; // minutes
 

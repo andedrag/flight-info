@@ -28,21 +28,7 @@ public class AppController {
 			@RequestParam("name") String name
 			) throws SQLException {
 		ResultDTO pilotDto = service.getPilotData(name);
-		//System.out.println(pilotDto);
 		model.addAttribute("pilot", pilotDto);
-		return "user.html";
+		return "pilot.html";
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-

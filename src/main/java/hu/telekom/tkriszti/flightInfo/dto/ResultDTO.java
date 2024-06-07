@@ -36,6 +36,6 @@ public final class ResultDTO {
 
 	@Override
 	public String toString() {
-		return String.format(pilotName + " " + pilotLicenceYear +"%n%n" + flightsByPilot +  totalFlightTime );
+		return String.format(pilotName + " " + pilotLicenceYear +" Flights: " + flightsByPilot + " " + totalFlightTime + " minutes");
 	}
 }

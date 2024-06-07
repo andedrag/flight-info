@@ -29,6 +29,7 @@ public class PilotInfoServiceDbImpl implements PilotInfoService {
 		List<Flight> flights = dao.getFlightsByPilotId(pilot.getId());
 		List<Integer> flightIds = flights.stream().map(Flight::getID).collect(Collectors.toCollection(LinkedList::new));
 		int sumOfFlightTime = getSumOfFlightTime(flights);
+
 		return new ResultDTO(pilotName, licenseYear, flightIds, sumOfFlightTime);
 	}
 

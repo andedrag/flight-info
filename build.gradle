@@ -16,12 +16,12 @@ repositories {
 }
 
 dependencies {
-	implementation ("org.springframework.boot:spring-boot-starter-data-jdbc")
-	runtimeOnly ("com.mysql:mysql-connector-j")
-	// testImplementation 'org.springframework.boot:spring-boot-starter-test'
-	testImplementation('org.springframework.boot:spring-boot-starter-test') {exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'}
-	implementation	("org.springframework.boot:spring-boot-starter-web")
+	implementation 'org.springframework.boot:spring-boot-starter-data-jdbc'
+	runtimeOnly 'com.mysql:mysql-connector-j'
+	implementation	'org.springframework.boot:spring-boot-starter-web'
 	implementation("org.springframework.boot:spring-boot-starter-thymeleaf")
+	implementation("org.hibernate:hibernate-core:6.5.2.Final")
+	testImplementation('org.springframework.boot:spring-boot-starter-test') {exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'}
 }
 
 tasks.named('test') {
