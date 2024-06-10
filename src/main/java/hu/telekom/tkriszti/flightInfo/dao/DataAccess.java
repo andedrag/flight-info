@@ -67,7 +67,9 @@ public class DataAccess {
 		Session session = sessionFactory.openSession();
 		Transaction transaction = session.beginTransaction();
 		/** Perform SELECT operation */
-		Pilot pilot = session.get(Pilot.class, pilotName);
+		//Pilot pilot = session.get(Pilot.class, pilotName);
+		String hql = "SELECT * FROM pilots WHERE name = " + pilotName;
+		Pilot pilot = (Pilot) session.createQuery(hql).uniqueResult(); // Több találat kezelése! .list()
 		/** Execute transaction and Close Session */
 		transaction.commit();
 		session.close();

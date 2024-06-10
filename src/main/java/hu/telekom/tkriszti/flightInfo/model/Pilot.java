@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 
 import java.time.LocalDate;
 import java.util.Date;
+import java.util.List;
+
 @Entity
 @Table(name = "pilots")
 public class Pilot {
@@ -19,6 +21,14 @@ public class Pilot {
 	private String phoneNumber;
 	@Column(name = "licenseyear")
 	private int licenseYear;
+
+	@ManyToMany // Kell cascade?
+	@JoinTable(
+			name = "Pilot_Flight",
+			joinColumns = { @JoinColumn(name = "id") }, // Pilots tábla id mezője
+			inverseJoinColumns = { @JoinColumn(name = "id") } // flights tábla id mezője
+	)
+	private List<Flight> flights;
 
 	public Pilot(int Id, String name, LocalDate birthDate, String phoneNumber, int licenseYear) {
 		this.Id = Id;

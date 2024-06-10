@@ -2,6 +2,9 @@ package hu.telekom.tkriszti.flightInfo.model;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+import java.util.Set;
+
 @Entity
 @Table(name = "flights")
 public class Flight {
@@ -18,6 +21,9 @@ public class Flight {
 	@Column(name = "countryto")
 	private final int countryTo;
 	private final int flightTime; // minutes
+
+	@ManyToMany(mappedBy = "flights")
+	private Set<Pilot> pilots;
 
 	public Flight(int Id, int pilot1Id, int pilot2Id, int countryFrom, int countryTo, java.lang.Integer flightTime) {
 		this.Id = Id;
