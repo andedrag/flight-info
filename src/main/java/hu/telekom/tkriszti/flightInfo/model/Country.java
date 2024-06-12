@@ -8,7 +8,7 @@ public class Country {
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private final int Id;
+    private int Id;
 
     @Column(name = "name")
     private String name;
@@ -23,6 +23,8 @@ public class Country {
         this.currency = currency;
         this.riskLevel = riskLevel;
     }
+
+    public Country () {}
 
     public int getId() {return Id;}
     public String getName() {

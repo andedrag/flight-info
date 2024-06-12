@@ -11,16 +11,16 @@ public class Flight {
 	@Id
 	@Column(name = "id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private final int Id;
+	private int Id;
 	@Column(name = "pilot1id")
-	private final int pilot1Id;
+	private int pilot1Id;
 	@Column(name = "pilot2id")
-	private final int pilot2Id;
+	private int pilot2Id;
 	@Column(name = "countryfrom")
-	private final int countryFrom;
+	private int countryFrom;
 	@Column(name = "countryto")
-	private final int countryTo;
-	private final int flightTime; // minutes
+	private int countryTo;
+	private int flightTime; // minutes
 
 	@ManyToMany(mappedBy = "flights")
 	private Set<Pilot> pilots;
@@ -32,6 +32,9 @@ public class Flight {
 		this.countryFrom = countryFrom;
 		this.countryTo = countryTo;
 		this.flightTime = flightTime;
+	}
+
+	public Flight() {
 	}
 
 	public int getID() {
