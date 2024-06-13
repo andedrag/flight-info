@@ -1,6 +1,8 @@
 package hu.telekom.tkriszti.flightInfo.controller;
 
 import java.sql.SQLException;
+import java.util.Set;
+
 import hu.telekom.tkriszti.flightInfo.dto.ResultDTO;
 import hu.telekom.tkriszti.flightInfo.service.PilotInfoServiceDbImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,8 +29,8 @@ public class AppController {
 			Model model,
 			@RequestParam("name") String name
 			) throws SQLException {
-		ResultDTO pilotDto = service.getPilotData(name);
-		model.addAttribute("pilot", pilotDto);
+		Set<ResultDTO> pilotDtos = service.getPilotData(name);
+		model.addAttribute("pilot", pilotDtos);
 		return "pilot.html";
 	}
 }
