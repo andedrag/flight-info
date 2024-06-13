@@ -30,7 +30,7 @@ public class DataAccess {
 		Session session = sessionFactory.openSession();
 		Transaction transaction = session.beginTransaction();
 		/** Perform SELECT operation */
-		Query query = session.createQuery("SELECT * FROM pilots WHERE name = :pilotname");
+		Query query = session.createQuery("FROM Pilot P WHERE P.name = :pilotname");
 		query.setParameter("pilotname", pilotName);
 		Set<Pilot> relevantPilots = new HashSet<>(query.list());
 		/** Execute transaction and Close Session */
@@ -42,7 +42,7 @@ public class DataAccess {
 	public Set<Flight> getFlightsByPilotId (int pilotId) throws SQLException {
 		Session session = sessionFactory.openSession();
 		Transaction transaction = session.beginTransaction();
-		Query query = session.createQuery("SELECT * FROM flights WHERE pilot1id = :pilotid OR pilot2id = :pilotid");
+		Query query = session.createQuery("FROM Flight F WHERE pilot1Id = :pilotid OR pilot2Id = :pilotid");
 		query.setParameter("pilotid", pilotId);
 		Set<Flight> relevantFlights = new HashSet<>(query.list());
 		transaction.commit();

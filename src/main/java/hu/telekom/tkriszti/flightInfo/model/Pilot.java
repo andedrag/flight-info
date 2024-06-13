@@ -23,8 +23,8 @@ public class Pilot {
 	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinTable(
 			name = "pilots_flights",
-			joinColumns = { @JoinColumn(name = "pilot_id", nullable = false, updatable = false) },
-			inverseJoinColumns = { @JoinColumn(name = "flight_id", nullable = false, updatable = false) }
+			joinColumns = { @JoinColumn(name = "pilot_id") },
+			inverseJoinColumns = { @JoinColumn(name = "flight_id") }
 	)
 	private List<Flight> relatedFlights;
 

@@ -21,7 +21,7 @@ public class Flight {
 	private int countryTo;
 	private int flightTime; // minutes
 
-	@ManyToMany(mappedBy = "flights")
+	@ManyToMany(mappedBy = "relatedFlights")
 	private Set<Pilot> pilots;
 
 	public Flight(int Id, int pilot1Id, int pilot2Id, int countryFrom, int countryTo, java.lang.Integer flightTime) {
