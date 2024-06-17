@@ -1,7 +1,5 @@
 package hu.telekom.tkriszti.flightInfo.dto;
 
-import hu.telekom.tkriszti.flightInfo.model.Pilot;
-
 import java.util.List;
 
 public final class ResultDTO {

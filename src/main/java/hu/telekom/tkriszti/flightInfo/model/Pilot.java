@@ -1,24 +1,32 @@
 package hu.telekom.tkriszti.flightInfo.model;
 
 import jakarta.persistence.*;
-
 import java.time.LocalDate;
-import java.util.Date;
+import java.util.List;
+
 @Entity
 @Table(name = "pilots")
 public class Pilot {
 	@Id
 	@Column(name = "id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private final int Id;
+	private int Id;
 	@Column(name = "name")
 	private String name;
 	@Column(name = "birthdate")
-	private final LocalDate birthDate;
+	private LocalDate birthDate;
 	@Column(name = "phonenr")
 	private String phoneNumber;
 	@Column(name = "licenseyear")
 	private int licenseYear;
+
+	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JoinTable(
+			name = "pilots_flights",
+			joinColumns = { @JoinColumn(name = "pilot_id") },
+			inverseJoinColumns = { @JoinColumn(name = "flight_id") }
+	)
+	private List<Flight> relatedFlights;
 
 	public Pilot(int Id, String name, LocalDate birthDate, String phoneNumber, int licenseYear) {
 		this.Id = Id;
@@ -26,6 +34,9 @@ public class Pilot {
 		this.birthDate = birthDate;
 		this.phoneNumber = phoneNumber;
 		this.licenseYear = licenseYear;
+	}
+
+	public Pilot() {
 	}
 
 	public int getId() {

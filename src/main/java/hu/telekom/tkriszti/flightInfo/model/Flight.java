@@ -2,22 +2,27 @@ package hu.telekom.tkriszti.flightInfo.model;
 
 import jakarta.persistence.*;
 
+import java.util.Set;
+
 @Entity
 @Table(name = "flights")
 public class Flight {
 	@Id
 	@Column(name = "id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private final int Id;
+	private int Id;
 	@Column(name = "pilot1id")
-	private final int pilot1Id;
+	private int pilot1Id;
 	@Column(name = "pilot2id")
-	private final int pilot2Id;
+	private int pilot2Id;
 	@Column(name = "countryfrom")
-	private final int countryFrom;
+	private int countryFrom;
 	@Column(name = "countryto")
-	private final int countryTo;
-	private final int flightTime; // minutes
+	private int countryTo;
+	private int flightTime; // minutes
+
+	@ManyToMany(mappedBy = "relatedFlights")
+	private Set<Pilot> pilots;
 
 	public Flight(int Id, int pilot1Id, int pilot2Id, int countryFrom, int countryTo, java.lang.Integer flightTime) {
 		this.Id = Id;
@@ -26,6 +31,9 @@ public class Flight {
 		this.countryFrom = countryFrom;
 		this.countryTo = countryTo;
 		this.flightTime = flightTime;
+	}
+
+	public Flight() {
 	}
 
 	public int getID() {
