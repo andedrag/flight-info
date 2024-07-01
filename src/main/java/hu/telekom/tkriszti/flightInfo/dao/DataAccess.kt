@@ -9,10 +9,8 @@ import java.sql.SQLException
 
 @Repository
 class DataAccess {
-
-    private var sessionFactory: SessionFactory? = null // A null opció miatt nem lehet contructor paraméter? Ld. vs. Controller
-
-    fun constructor() {
+    private var sessionFactory: SessionFactory? = null
+    init {
         val config = Configuration()
         config.configure() // load settings from hibernate.cfg.xml
         sessionFactory = config.buildSessionFactory()

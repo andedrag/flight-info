@@ -1,18 +1,10 @@
 package hu.telekom.tkriszti.flightInfo.dto
 
-class ResultDTO {
-    private var pilotName: String? = null
-    private var pilotLicenceYear = 0
-    private var flightsByPilot: List<Int>? = null
-    private var totalFlightTime = 0
-
-    fun ResultDTO(pilotName: String?, pilotLicenceYear: Int, flightsByPilot: List<Int>?, totalFlightTime: Int) {
-        this.pilotName = pilotName
-        this.pilotLicenceYear = pilotLicenceYear
-        this.flightsByPilot = flightsByPilot
-        this.totalFlightTime = totalFlightTime
-    }
-
+class ResultDTO (
+    private var pilotName: String? = null,
+    private var pilotLicenceYear: Int = 0,
+    private var flightsByPilot: List<Int>? = null,
+    private var totalFlightTime: Int = 0 ) {
     fun getPilotName(): String? {
         return pilotName
     }

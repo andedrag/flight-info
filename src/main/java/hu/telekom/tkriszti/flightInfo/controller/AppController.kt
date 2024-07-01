@@ -13,7 +13,7 @@ import kotlin.jvm.Throws
 @Controller
 class AppController {
     @Autowired
-    fun constructor(service: PilotInfoServiceDbImpl) {
+    fun AppController(service: PilotInfoServiceDbImpl) {
 
         @GetMapping("/pilot")
         @Throws(SQLException::class)

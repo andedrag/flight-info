@@ -8,6 +8,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import hu.telekom.tkriszti.flightInfo.dao.DataAccess;
+import hu.telekom.tkriszti.flightInfo.dto.ResultDTO;
 import hu.telekom.tkriszti.flightInfo.model.Flight;
 import hu.telekom.tkriszti.flightInfo.model.Pilot;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,7 +33,8 @@ public class PilotInfoServiceDbImpl implements PilotInfoService {
 			Set<Flight> flights = dao.getFlightsByPilotId(pilot.getId());
 			List<Integer> flightIds = flights.stream().map(Flight::getID).collect(Collectors.toCollection(LinkedList::new));
 			int sumOfFlightTime = getSumOfFlightTime(flights);
-			relevantPilotData.add(new ResultDTO(pilotName, licenseYear, flightIds, sumOfFlightTime));
+			relevantPilotData.add(
+					new ResultDTO(pilotName, licenseYear, flightIds, sumOfFlightTime));
 		}
 		return relevantPilotData;
 	}
