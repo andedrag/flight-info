@@ -1,6 +1,6 @@
-package hu.telekom.tkriszti.flightInfo.model;
+package hu.telekom.tkriszti.flightInfo.model
 
-public enum RiskLevels {
+enum class RiskLevels {
     LOWEST,
     LOWER,
     LOW,
