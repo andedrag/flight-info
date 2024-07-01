@@ -1,78 +1,69 @@
-package hu.telekom.tkriszti.flightInfo.model;
+package hu.telekom.tkriszti.flightInfo.model
 
-import jakarta.persistence.*;
-import java.time.LocalDate;
-import java.util.List;
+import jakarta.persistence.*
+import java.time.LocalDate
 
 @Entity
 @Table(name = "pilots")
-public class Pilot {
-	@Id
-	@Column(name = "id")
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int Id;
-	@Column(name = "name")
-	private String name;
-	@Column(name = "birthdate")
-	private LocalDate birthDate;
-	@Column(name = "phonenr")
-	private String phoneNumber;
-	@Column(name = "licenseyear")
-	private int licenseYear;
+class Pilot (
+    @Id
+    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private var Id: Int = 0,
 
-	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	@JoinTable(
-			name = "pilots_flights",
-			joinColumns = { @JoinColumn(name = "pilot_id") },
-			inverseJoinColumns = { @JoinColumn(name = "flight_id") }
-	)
-	private List<Flight> relatedFlights;
+    @Column(name = "name")
+    private var name: String? = null,
 
-	public Pilot(int Id, String name, LocalDate birthDate, String phoneNumber, int licenseYear) {
-		this.Id = Id;
-		this.name = name;
-		this.birthDate = birthDate;
-		this.phoneNumber = phoneNumber;
-		this.licenseYear = licenseYear;
-	}
+    @Column(name = "birthdate")
+    private var birthDate: LocalDate? = null,
 
-	public Pilot() {
-	}
+    @Column(name = "phonenr")
+    private var phoneNumber: String? = null,
 
-	public int getId() {
-		return Id;
-	}
+    @Column(name = "licenseyear")
+    private var licenseYear: Int = 0) {
 
-	public String getName() {
-		return name;
-	}
+    @ManyToMany(fetch = FetchType.LAZY, cascade = [CascadeType.ALL])
+    @JoinTable(
+        name = "pilots_flights",
+        joinColumns = [JoinColumn(name = "pilot_id")],
+        inverseJoinColumns = [JoinColumn(name = "flight_id")]
+    )
+    private val relatedFlights: List<Flight>? = null
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    fun getId(): Int {
+        return Id
+    }
 
-	public LocalDate getBirthDate() {
-		return birthDate;
-	}
+    fun getName(): String? {
+        return name
+    }
 
-	public String getPhoneNumber() {
-		return phoneNumber;
-	}
+    fun setName(name: String?) {
+        this.name = name
+    }
 
-	public void setPhoneNumber(String phoneNumber) {
-		this.phoneNumber = phoneNumber;
-	}
+    fun getBirthDate(): LocalDate? {
+        return birthDate
+    }
 
-	public int getLicenseYear() {
-		return licenseYear;
-	}
+    fun getPhoneNumber(): String? {
+        return phoneNumber
+    }
 
-	public void setLicenseYear(int licenseYear) {
-		this.licenseYear = licenseYear;
-	}
+    fun setPhoneNumber(phoneNumber: String?) {
+        this.phoneNumber = phoneNumber
+    }
 
-	@Override
-	public String toString() {
-		return "Pilot " + Id + ": " + name + "[born " + birthDate + " licensed since " + licenseYear + " (phone:" + phoneNumber + ")]";
-	}
+    fun getLicenseYear(): Int {
+        return licenseYear
+    }
+
+    fun setLicenseYear(licenseYear: Int) {
+        this.licenseYear = licenseYear
+    }
+
+    override fun toString(): String {
+        return "Pilot $Id: $name[born $birthDate licensed since $licenseYear (phone:$phoneNumber)]"
+    }
 }
