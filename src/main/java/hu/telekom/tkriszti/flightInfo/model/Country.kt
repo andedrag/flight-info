@@ -1,58 +1,53 @@
-package hu.telekom.tkriszti.flightInfo.model;
+package hu.telekom.tkriszti.flightInfo.model
 
-import jakarta.persistence.*;
+import jakarta.persistence.*
 
 @Entity
 @Table(name = "countries")
-public class Country {
+class Country (
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int Id;
+    private var Id: Int = 0,
 
     @Column(name = "name")
-    private String name;
+    private var name: String? = null,
+
     @Column(name = "currency")
-    private String currency;
+    private var currency: String? = null,
+
     @Column(name = "risklevel")
-    private RiskLevels riskLevel;
+    private var riskLevel: RiskLevels? = null){
 
-    public Country(int Id, String name, String currency, RiskLevels riskLevel) {
-        this.Id = Id;
-        this.name = name;
-        this.currency = currency;
-        this.riskLevel = riskLevel;
+    fun getId(): Int {
+        return Id
     }
 
-    public Country () {}
-
-    public int getId() {return Id;}
-    public String getName() {
-        return name;
+    fun getName(): String? {
+        return name
     }
 
-    public void setName(String name) {
-        this.name = name;
+    fun setName(name: String?) {
+        this.name = name
     }
 
-    public String getCurrency() {
-        return currency;
+    fun getCurrency(): String? {
+        return currency
     }
 
-    public void setCurrency(String currency) {
-        this.currency = currency;
+    fun setCurrency(currency: String?) {
+        this.currency = currency
     }
 
-    public RiskLevels getRiskLevel() {
-        return riskLevel;
+    fun getRiskLevel(): RiskLevels? {
+        return riskLevel
     }
 
-    public void setRiskLevel(RiskLevels riskLevel) {
-        this.riskLevel = riskLevel;
+    fun setRiskLevel(riskLevel: RiskLevels?) {
+        this.riskLevel = riskLevel
     }
 
-    @Override
-    public String toString() {
-        return "Country name: " + name + " (currency: " + currency + ", risk level as destination: " + riskLevel + ")";
+    override fun toString(): String {
+        return "Country name: $name (currency: $currency, risk level as destination: $riskLevel)"
     }
 }
