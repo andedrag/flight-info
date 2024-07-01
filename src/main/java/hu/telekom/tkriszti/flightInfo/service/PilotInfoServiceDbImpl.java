@@ -8,7 +8,6 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import hu.telekom.tkriszti.flightInfo.dao.DataAccess;
-import hu.telekom.tkriszti.flightInfo.dto.ResultDTO;
 import hu.telekom.tkriszti.flightInfo.model.Flight;
 import hu.telekom.tkriszti.flightInfo.model.Pilot;
 import org.springframework.beans.factory.annotation.Autowired;

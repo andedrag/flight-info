@@ -1,39 +1,35 @@
-package hu.telekom.tkriszti.flightInfo.dto;
+package hu.telekom.tkriszti.flightInfo.dto
 
-import java.util.List;
+class ResultDTO {
+    private var pilotName: String? = null
+    private var pilotLicenceYear = 0
+    private var flightsByPilot: List<Int>? = null
+    private var totalFlightTime = 0
 
-public final class ResultDTO {
-	
-	private final String pilotName;
-	private final int pilotLicenceYear;
-	private final List<Integer> flightsByPilot;
-	private final int totalFlightTime;
+    fun ResultDTO(pilotName: String?, pilotLicenceYear: Int, flightsByPilot: List<Int>?, totalFlightTime: Int) {
+        this.pilotName = pilotName
+        this.pilotLicenceYear = pilotLicenceYear
+        this.flightsByPilot = flightsByPilot
+        this.totalFlightTime = totalFlightTime
+    }
 
-	public ResultDTO(String pilotName, int pilotLicenceYear, List<Integer> flightsByPilot, int totalFlightTime) {
-		this.pilotName = pilotName;
-		this.pilotLicenceYear = pilotLicenceYear;
-		this.flightsByPilot = flightsByPilot;
-		this.totalFlightTime = totalFlightTime;
-	}
+    fun getPilotName(): String? {
+        return pilotName
+    }
 
-	public String getPilotName() {
-		return pilotName;
-	}
+    fun getPilotLicenceYear(): Int {
+        return pilotLicenceYear
+    }
 
-	public int getPilotLicenceYear() {
-		return pilotLicenceYear;
-	}
+    fun getFlightsByPilot(): List<Int>? {
+        return flightsByPilot
+    }
 
-	public List<Integer> getFlightsByPilot() {
-		return flightsByPilot;
-	}
+    fun getTotalFlightTime(): Int {
+        return totalFlightTime
+    }
 
-	public int getTotalFlightTime() {
-		return totalFlightTime;
-	}
-
-	@Override
-	public String toString() {
-		return String.format(pilotName + " " + pilotLicenceYear +" Flights: " + flightsByPilot + " " + totalFlightTime + " minutes");
-	}
+    override fun toString(): String {
+        return String.format("$pilotName $pilotLicenceYear Flights: $flightsByPilot $totalFlightTime minutes")
+    }
 }
