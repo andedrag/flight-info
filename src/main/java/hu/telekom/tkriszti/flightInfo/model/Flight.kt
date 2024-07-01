@@ -1,68 +1,58 @@
-package hu.telekom.tkriszti.flightInfo.model;
+package hu.telekom.tkriszti.flightInfo.model
 
-import jakarta.persistence.*;
-
-import java.util.Set;
+import jakarta.persistence.*
 
 @Entity
 @Table(name = "flights")
-public class Flight {
-	@Id
-	@Column(name = "id")
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int Id;
-	@Column(name = "pilot1id")
-	private int pilot1Id;
-	@Column(name = "pilot2id")
-	private int pilot2Id;
-	@Column(name = "countryfrom")
-	private int countryFrom;
-	@Column(name = "countryto")
-	private int countryTo;
-	private int flightTime; // minutes
+class Flight (
+    @Id
+    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private var Id: Int = 0,
 
-	@ManyToMany(mappedBy = "relatedFlights")
-	private Set<Pilot> pilots;
+    @Column(name = "pilot1id")
+    private var pilot1Id: Int = 0,
 
-	public Flight(int Id, int pilot1Id, int pilot2Id, int countryFrom, int countryTo, java.lang.Integer flightTime) {
-		this.Id = Id;
-		this.pilot1Id = pilot1Id;
-		this.pilot2Id = pilot2Id;
-		this.countryFrom = countryFrom;
-		this.countryTo = countryTo;
-		this.flightTime = flightTime;
-	}
+    @Column(name = "pilot2id")
+    private var pilot2Id: Int = 0,
 
-	public Flight() {
-	}
+    @Column(name = "countryfrom")
+    private var countryFrom: Int = 0,
 
-	public int getID() {
-		return Id;
-	}
+    @Column(name = "countryto")
+    private var countryTo: Int = 0,
 
-	public int getPilot1Id() {
-		return pilot1Id;
-	}
+    @Column(name = "flighttime")
+    private var flightTime: Int = 0, // minutes
 
-	public int getPilot2Id() {
-		return pilot2Id;
-	}
+    @ManyToMany(mappedBy = "relatedFlights")
+    private val pilots: Set<Pilot>? = null){
 
-	public int getCountryFrom() {
-		return countryFrom;
-	}
+    fun getID(): Int {
+        return Id
+    }
 
-	public int getCountryTo() {
-		return countryTo;
-	}
+    fun getPilot1Id(): Int {
+        return pilot1Id
+    }
 
-	public java.lang.Integer getFlightTime() {
-		return flightTime;
-	}
+    fun getPilot2Id(): Int {
+        return pilot2Id
+    }
 
-	@Override
-	public String toString() {
-		return "" + Id;
-	}
+    fun getCountryFrom(): Int {
+        return countryFrom
+    }
+
+    fun getCountryTo(): Int {
+        return countryTo
+    }
+
+    fun getFlightTime(): Int {
+        return flightTime
+    }
+
+    override fun toString(): String {
+        return "" + Id
+    }
 }
-
