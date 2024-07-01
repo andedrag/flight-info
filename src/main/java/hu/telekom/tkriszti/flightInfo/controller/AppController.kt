@@ -16,9 +16,9 @@ class AppController {
     fun constructor(service: PilotInfoServiceDbImpl) {
 
         @GetMapping("/pilot")
-        //@Throws(SQLException::class)
+        @Throws(SQLException::class)
         fun showPilotData(model: Model, @RequestParam("name") name: String): String {
-            var pilotDtos: Set<ResultDTO> = service.getPilotData(name)
+            val pilotDtos: Set<ResultDTO> = service.getPilotData(name)
             model.addAttribute("pilot", pilotDtos)
             return "pilot.html"
         }
