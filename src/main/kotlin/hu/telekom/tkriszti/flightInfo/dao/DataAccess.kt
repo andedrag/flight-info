@@ -4,15 +4,30 @@ import hu.telekom.tkriszti.flightInfo.model.Flight
 import hu.telekom.tkriszti.flightInfo.model.Pilot
 import org.hibernate.SessionFactory
 import org.hibernate.cfg.Configuration
+import org.springframework.beans.factory.annotation.Value
+import org.springframework.stereotype.Component
 import org.springframework.stereotype.Repository
 import java.sql.SQLException
 
 @Repository
+//@Component
 open class DataAccess {
     private var sessionFactory: SessionFactory? = null
+
+//    @Value("\${application.spring.datasource.url}")
+//    private val dbUrl: String = ""
+//
+//    @Value("\${application.spring.datasource.username}")
+//    private val dbUsername: String = ""
+//
+//    @Value("\${application.spring.datasource.password}")
+//    private val dbPassword: String = ""
     init {
         val config = Configuration()
         config.configure() // load settings from hibernate.cfg.xml
+//        config.setProperty("hibernate.connection.url", dbUrl);
+//        config.setProperty("hibernate.connection.username", dbUsername);
+//        config.setProperty("hibernate.connection.password", dbPassword);
         sessionFactory = config.buildSessionFactory()
     }
 

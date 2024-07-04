@@ -12,7 +12,9 @@ import java.util.stream.Collectors
 
 @Service
 
-class PilotInfoServiceDbImpl @Autowired constructor(private val dao: DataAccess) : PilotInfoService {
+class PilotInfoServiceDbImpl
+
+(@Autowired private val dao: DataAccess) : PilotInfoService {
     @Throws(SQLException::class)
     override fun getPilotData(pilotName: String?): Set<ResultDTO?> {
         val relevantPilotData: MutableSet<ResultDTO?> = HashSet()
@@ -26,7 +28,7 @@ class PilotInfoServiceDbImpl @Autowired constructor(private val dao: DataAccess)
             )
             val sumOfFlightTime = getSumOfFlightTime(flights)
             relevantPilotData.add(
-                ResultDTO(pilotName, licenseYear, flightIds, sumOfFlightTime)
+                ResultDTO(pilotName?: "KovacsPisti", licenseYear, flightIds, sumOfFlightTime)
             )
         }
         return relevantPilotData
