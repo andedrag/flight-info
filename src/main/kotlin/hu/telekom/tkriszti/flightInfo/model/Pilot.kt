@@ -1,0 +1,69 @@
+package hu.telekom.tkriszti.flightInfo.model
+
+import jakarta.persistence.*
+import java.time.LocalDate
+
+@Entity
+@Table(name = "pilots")
+class Pilot (
+    @Id
+    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private var Id: Int = 0,
+
+    @Column(name = "name")
+    private var name: String? = null,
+
+    @Column(name = "birthdate")
+    private var birthDate: LocalDate? = null,
+
+    @Column(name = "phonenr")
+    private var phoneNumber: String? = null,
+
+    @Column(name = "licenseyear")
+    private var licenseYear: Int = 0) {
+
+    @ManyToMany(fetch = FetchType.LAZY, cascade = [CascadeType.ALL])
+    @JoinTable(
+        name = "pilots_flights",
+        joinColumns = [JoinColumn(name = "pilot_id")],
+        inverseJoinColumns = [JoinColumn(name = "flight_id")]
+    )
+    private val relatedFlights: List<Flight>? = null
+
+    fun getId(): Int {
+        return Id
+    }
+
+    fun getName(): String? {
+        return name
+    }
+
+    fun setName(name: String?) {
+        this.name = name
+    }
+
+    fun getBirthDate(): LocalDate? {
+        return birthDate
+    }
+
+    fun getPhoneNumber(): String? {
+        return phoneNumber
+    }
+
+    fun setPhoneNumber(phoneNumber: String?) {
+        this.phoneNumber = phoneNumber
+    }
+
+    fun getLicenseYear(): Int {
+        return licenseYear
+    }
+
+    fun setLicenseYear(licenseYear: Int) {
+        this.licenseYear = licenseYear
+    }
+
+    override fun toString(): String {
+        return "Pilot $Id: $name[born $birthDate licensed since $licenseYear (phone:$phoneNumber)]"
+    }
+}
