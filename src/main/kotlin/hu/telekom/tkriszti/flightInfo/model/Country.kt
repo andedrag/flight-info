@@ -11,7 +11,7 @@ class Country (
     private var Id: Int = 0,
 
     @Column(name = "name")
-    private var name: String? = null,
+    private var name: String? = null, // ne lehessen null! mindenhol átgondolni
 
     @Column(name = "currency")
     private var currency: String? = null,

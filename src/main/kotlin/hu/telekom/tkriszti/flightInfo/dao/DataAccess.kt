@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository
 import java.sql.SQLException
 
 @Repository
-class DataAccess {
+open class DataAccess {
     private var sessionFactory: SessionFactory? = null
     init {
         val config = Configuration()

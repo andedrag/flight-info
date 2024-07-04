@@ -5,9 +5,12 @@ import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
 
 @SpringBootApplication(exclude = [DataSourceAutoConfiguration::class])
-object FlightInfoApplication {
-    @JvmStatic
-    fun main(args: Array<String>) {
-        SpringApplication.run(FlightInfoApplication::class.java, *args)
+open class FlightInfoApplication {
+
+    companion object {
+        @JvmStatic
+        fun main(args: Array<String>) {
+            SpringApplication.run(FlightInfoApplication::class.java, *args)
+        }
     }
 }
