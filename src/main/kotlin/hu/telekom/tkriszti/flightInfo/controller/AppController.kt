@@ -16,7 +16,7 @@ class AppController
     (@Autowired val service: PilotInfoServiceDbImpl) {
 
         @GetMapping("/pilot")
-        //@Throws(SQLException::class)
+        @Throws(SQLException::class)
         fun showPilotData(model: Model, @RequestParam("name") name: String): String {
             val pilotDtos: Set<ResultDTO?> = service.getPilotData(name)
             model.addAttribute("pilot", pilotDtos)
