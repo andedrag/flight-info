@@ -1,5 +1,6 @@
 package hu.telekom.tkriszti.flightInfo.controller
 
+import hu.telekom.tkriszti.flightInfo.dao.DataAccess
 import hu.telekom.tkriszti.flightInfo.dto.ResultDTO
 import hu.telekom.tkriszti.flightInfo.service.PilotInfoServiceDbImpl
 import org.springframework.beans.factory.annotation.Autowired
@@ -11,9 +12,8 @@ import java.sql.SQLException
 import kotlin.jvm.Throws
 
 @Controller
-class AppController {
-    @Autowired
-    fun AppController(service: PilotInfoServiceDbImpl) {
+class AppController
+    (@Autowired val service: PilotInfoServiceDbImpl) {
 
         @GetMapping("/pilot")
         @Throws(SQLException::class)
@@ -23,4 +23,3 @@ class AppController {
             return "pilot.html"
         }
     }
-}
