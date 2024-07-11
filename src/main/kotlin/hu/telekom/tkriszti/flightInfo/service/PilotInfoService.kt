@@ -5,5 +5,5 @@ import java.sql.SQLException
 
 interface PilotInfoService {
     @Throws(SQLException::class)
-    fun getPilotData(pilotName: String?): Set<ResultDTO?>?
+    fun getPilotData(pilotName: String): Set<ResultDTO?>?
 }
