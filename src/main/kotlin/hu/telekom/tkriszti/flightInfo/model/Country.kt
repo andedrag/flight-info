@@ -11,39 +11,39 @@ class Country (
     private var Id: Int = 0,
 
     @Column(name = "name")
-    private var name: String? = null, // ne lehessen null! mindenhol átgondolni
+    private var name: String,
 
     @Column(name = "currency")
-    private var currency: String? = null,
+    private var currency: String,
 
     @Column(name = "risklevel")
-    private var riskLevel: RiskLevels? = null){
+    private var riskLevel: RiskLevels){
 
     fun getId(): Int {
         return Id
     }
 
-    fun getName(): String? {
+    fun getName(): String {
         return name
     }
 
-    fun setName(name: String?) {
+    fun setName(name: String) {
         this.name = name
     }
 
-    fun getCurrency(): String? {
+    fun getCurrency(): String {
         return currency
     }
 
-    fun setCurrency(currency: String?) {
+    fun setCurrency(currency: String) {
         this.currency = currency
     }
 
-    fun getRiskLevel(): RiskLevels? {
+    fun getRiskLevel(): RiskLevels {
         return riskLevel
     }
 
-    fun setRiskLevel(riskLevel: RiskLevels?) {
+    fun setRiskLevel(riskLevel: RiskLevels) {
         this.riskLevel = riskLevel
     }
 
