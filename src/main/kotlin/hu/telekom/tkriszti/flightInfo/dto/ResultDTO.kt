@@ -6,10 +6,10 @@ import lombok.Setter
 @Getter
 @Setter
 class ResultDTO (
-    private var pilotName: String,
-    private var pilotLicenceYear: Int,
-    private var flightsByPilot: List<Int>,
-    private var totalFlightTime: Int) {
+    var pilotName: String,
+    var pilotLicenceYear: Int,
+    var flightsByPilot: List<Int>,
+    var totalFlightTime: Int) {
 
     override fun toString(): String {
         return String.format("$pilotName $pilotLicenceYear Flights: $flightsByPilot $totalFlightTime minutes")
