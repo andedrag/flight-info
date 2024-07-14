@@ -3,7 +3,6 @@ package hu.telekom.tkriszti.flightInfo.controller
 import hu.telekom.tkriszti.flightInfo.dto.ResultDTO
 import hu.telekom.tkriszti.flightInfo.service.PilotInfoService
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.http.MediaType
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
 import org.springframework.web.bind.annotation.GetMapping
