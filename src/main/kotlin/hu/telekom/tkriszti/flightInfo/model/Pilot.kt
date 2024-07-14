@@ -12,16 +12,18 @@ class Pilot (
     private var Id: Int = 0,
 
     @Column(name = "name")
-    private var name: String? = null,
+    private var name: String,
 
     @Column(name = "birthdate")
-    private var birthDate: LocalDate? = null,
+    private var birthDate: LocalDate,
 
     @Column(name = "phonenr")
-    private var phoneNumber: String? = null,
+    private var phoneNumber: String,
 
     @Column(name = "licenseyear")
     private var licenseYear: Int = 0) {
+
+    constructor() : this(0, "", LocalDate.now(), "", 0)
 
     @ManyToMany(fetch = FetchType.LAZY, cascade = [CascadeType.ALL])
     @JoinTable(
@@ -35,23 +37,23 @@ class Pilot (
         return Id
     }
 
-    fun getName(): String? {
+    fun getName(): String {
         return name
     }
 
-    fun setName(name: String?) {
+    fun setName(name: String) {
         this.name = name
     }
 
-    fun getBirthDate(): LocalDate? {
+    fun getBirthDate(): LocalDate {
         return birthDate
     }
 
-    fun getPhoneNumber(): String? {
+    fun getPhoneNumber(): String {
         return phoneNumber
     }
 
-    fun setPhoneNumber(phoneNumber: String?) {
+    fun setPhoneNumber(phoneNumber: String) {
         this.phoneNumber = phoneNumber
     }
 
