@@ -2,14 +2,13 @@ package hu.telekom.tkriszti.flightInfo.dao
 
 import hu.telekom.tkriszti.flightInfo.model.Flight
 import hu.telekom.tkriszti.flightInfo.model.Pilot
+import jakarta.transaction.Transactional
 import org.hibernate.SessionFactory
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.stereotype.Component
-import org.springframework.transaction.annotation.Transactional
+import org.springframework.stereotype.Repository
 import java.sql.SQLException
 
-@Component
-//@Repository
+@Repository
 open class DataAccess (@Autowired private val sessionFactory: SessionFactory) {
 
     @Transactional
