@@ -3,7 +3,7 @@ package hu.telekom.tkriszti.flightInfo.controller
 import hu.telekom.tkriszti.flightInfo.dto.ResultDTO
 import hu.telekom.tkriszti.flightInfo.service.PilotInfoService
 import org.junit.jupiter.api.Test
-import org.mockito.Mockito.`when`
+import org.mockito.Mockito.*
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest
 import org.springframework.boot.test.mock.mockito.MockBean
@@ -18,8 +18,9 @@ class AppControllerJsonTest {
     @Autowired
     private lateinit var mockMvc: MockMvc
 
-    @MockBean
-    private lateinit var pilotInfoService: PilotInfoService
+//    @MockBean
+//    private lateinit var pilotInfoService: PilotInfoService
+    private val pilotInfoService = mock(PilotInfoService::class.java)
 
     @Test
     fun testGetPliotDataJson() {
@@ -32,9 +33,7 @@ class AppControllerJsonTest {
                 totalFlightTime = 444
             )
         )
-
         `when` (pilotInfoService.getPilotData(pilotName)).thenReturn(mockPilotData)
-
 
         mockMvc.perform(get("/pilot/json")
             .param("name", pilotName))
@@ -51,5 +50,7 @@ class AppControllerJsonTest {
             ]
             """.trimIndent()
             ))
+
+        verify(pilotInfoService, times(1)).getPilotData(pilotName)
     }
 }
