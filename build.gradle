@@ -14,6 +14,13 @@ java {
 
 repositories {
 	mavenCentral()
+	maven {
+		url artifactory_resolveUrl
+		credentials {
+			username = artifactory_user
+			password = artifactory_password
+		}
+	}
 }
 
 dependencies {
@@ -26,6 +33,11 @@ dependencies {
 	compileOnly 'org.projectlombok:lombok:1.18.34'
 	annotationProcessor 'org.projectlombok:lombok:1.18.34'
 	implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
+	implementation platform('hu.mt:dps-logging-spec-bom:3.5.2')
+    implementation('hu.mt:dps-logging-formatter')
+	implementation('hu.mt:dps-logging-spring-config')
+	implementation("hu.mt:dps-logging-springboot3-rest")
+
 }
 
 tasks.named('test') {
