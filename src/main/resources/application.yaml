@@ -5,6 +5,23 @@ spring:
         url: jdbc:mysql://localhost:3307/flightdb
         username: root
         password: root
+management:
+    server:
+        port: ${MANAGEMENT_PORT:9000}
+    endpoints:
+        web:
+            exposure:
+                include: health # , shutdown, prometheus
+ #           base-path: "/"
+  #          path-mapping:
+   #             prometheus: "metrics"
+   #     endpoint:
+   #         shutdown:
+   #             enabled: true
+   #         health:
+   #             show-details: always
+
+
 
 
 

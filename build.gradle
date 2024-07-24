@@ -37,7 +37,7 @@ dependencies {
     implementation('hu.mt:dps-logging-formatter')
 	implementation('hu.mt:dps-logging-spring-config')
 	implementation("hu.mt:dps-logging-springboot3-rest")
-
+	implementation("org.springframework.boot:spring-boot-starter-actuator")
 }
 
 tasks.named('test') {
