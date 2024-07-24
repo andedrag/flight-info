@@ -10,7 +10,6 @@ import java.util.*
 import java.util.stream.Collectors
 
 @Service
-
 class PilotInfoServiceDbImpl (@Autowired private val dao: DataAccess) : PilotInfoService {
     @Throws(SQLException::class)
     override fun getPilotData(pilotName: String): Set<ResultDTO?> {
