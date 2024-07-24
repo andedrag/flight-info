@@ -1,0 +1,10 @@
+spring:
+    application:
+        name: flightInfo
+    datasource:
+        url: jdbc:mysql://localhost:3307/flightdb
+        username: root
+        password: root
+
+
+
