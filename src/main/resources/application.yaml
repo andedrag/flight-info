@@ -11,7 +11,7 @@ management:
     endpoints:
         web:
             exposure:
-                include: health # , shutdown, prometheus
+                include: health, prometheus # , shutdown
  #           base-path: "/"
   #          path-mapping:
    #             prometheus: "metrics"
