@@ -8,7 +8,7 @@ import lombok.Setter
 class ResultDTO (
     var pilotName: String,
     var pilotLicenceYear: Int,
-    var flightsByPilot: List<Int>,
+    var flightsByPilot: List<String>,
     var totalFlightTime: Int) {
 
     override fun toString(): String {

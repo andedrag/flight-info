@@ -1,51 +1,16 @@
 package hu.telekom.tkriszti.flightInfo.model
 
-import jakarta.persistence.*
+import org.springframework.data.annotation.Id
+import org.springframework.data.mongodb.core.mapping.Document
 
-@Entity
-@Table(name = "countries")
-class Country (
+@Document(collection = "countries")
+data class Country(
     @Id
-    @Column(name = "id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private var Id: Int = 0,
-
-    @Column(name = "name")
-    private var name: String,
-
-    @Column(name = "currency")
-    private var currency: String,
-
-    @Column(name = "risklevel")
-    private var riskLevel: RiskLevels){
-
-    fun getId(): Int {
-        return Id
-    }
-
-    fun getName(): String {
-        return name
-    }
-
-    fun setName(name: String) {
-        this.name = name
-    }
-
-    fun getCurrency(): String {
-        return currency
-    }
-
-    fun setCurrency(currency: String) {
-        this.currency = currency
-    }
-
-    fun getRiskLevel(): RiskLevels {
-        return riskLevel
-    }
-
-    fun setRiskLevel(riskLevel: RiskLevels) {
-        this.riskLevel = riskLevel
-    }
+    val id: String,
+    val name: String,
+    val currency: String,
+    val riskLevel: RiskLevels
+) {
 
     override fun toString(): String {
         return "Country name: $name (currency: $currency, risk level as destination: $riskLevel)"

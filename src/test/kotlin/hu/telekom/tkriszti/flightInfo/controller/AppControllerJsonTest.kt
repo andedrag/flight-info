@@ -18,9 +18,9 @@ class AppControllerJsonTest {
     @Autowired
     private lateinit var mockMvc: MockMvc
 
-//    @MockBean
-//    private lateinit var pilotInfoService: PilotInfoService
-    private val pilotInfoService = mock(PilotInfoService::class.java)
+   // private val pilotInfoService = mock(PilotInfoService::class.java)
+   @MockBean
+   private lateinit var pilotInfoService: PilotInfoService
 
     @Test
     fun testGetPliotDataJson() {
