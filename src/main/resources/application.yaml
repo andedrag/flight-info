@@ -1,6 +1,9 @@
 spring:
     application:
         name: flightInfo
+    data:
+        mongodb:
+            uri: mongodb://localhost:27017/flightdb
     datasource:
         url: jdbc:mysql://localhost:3307/flightdb
         username: root
