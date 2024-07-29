@@ -23,7 +23,7 @@ class AppControllerJsonTest {
    private lateinit var pilotInfoService: PilotInfoService
 
     @Test
-    fun testGetPliotDataJson() {
+    fun `getPilotData should return proper pilot data` () {
         val pilotName = "KovacsPeti"
         val mockPilotData = setOf(
             ResultDTO(
@@ -52,5 +52,6 @@ class AppControllerJsonTest {
             ))
 
         verify(pilotInfoService, times(1)).getPilotData(pilotName)
+        // külön tesztbe tenni ` `  elnevezéssel
     }
 }
