@@ -37,7 +37,9 @@ dependencies {
     implementation('hu.mt:dps-logging-formatter')
 	implementation('hu.mt:dps-logging-spring-config')
 	implementation("hu.mt:dps-logging-springboot3-rest")
-
+	implementation("org.springframework.boot:spring-boot-starter-actuator")
+	implementation("io.micrometer:micrometer-registry-prometheus")
+	implementation("org.springframework.boot:spring-boot-starter-data-mongodb")
 }
 
 tasks.named('test') {

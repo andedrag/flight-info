@@ -10,6 +10,16 @@ CREATE TABLE `countries` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
+-- create pilots
+CREATE TABLE `pilots` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `name` varchar(45) NOT NULL,
+  `birthdate` date NOT NULL,
+  `phonenr` varchar(45) DEFAULT NULL,
+  `licenseyear` int DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
 -- create flights
 CREATE TABLE `flights` (
   `id` int NOT NULL AUTO_INCREMENT,
@@ -28,16 +38,6 @@ CREATE TABLE `flights` (
   CONSTRAINT `pilot1_fk` FOREIGN KEY (`pilot1id`) REFERENCES `pilots` (`id`),
   CONSTRAINT `pilot2_fk` FOREIGN KEY (`pilot2id`) REFERENCES `pilots` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
--- create pilots
-CREATE TABLE `pilots` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `name` varchar(45) NOT NULL,
-  `birthdate` date NOT NULL,
-  `phonenr` varchar(45) DEFAULT NULL,
-  `licenseyear` int DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- create pilots_flights
 CREATE TABLE `pilots_flights` (

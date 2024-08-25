@@ -18,12 +18,12 @@ class AppControllerJsonTest {
     @Autowired
     private lateinit var mockMvc: MockMvc
 
-//    @MockBean
-//    private lateinit var pilotInfoService: PilotInfoService
-    private val pilotInfoService = mock(PilotInfoService::class.java)
+   // private val pilotInfoService = mock(PilotInfoService::class.java)
+   @MockBean
+   private lateinit var pilotInfoService: PilotInfoService
 
     @Test
-    fun testGetPliotDataJson() {
+    fun `getPilotData should return proper pilot data` () {
         val pilotName = "KovacsPeti"
         val mockPilotData = setOf(
             ResultDTO(
@@ -52,5 +52,6 @@ class AppControllerJsonTest {
             ))
 
         verify(pilotInfoService, times(1)).getPilotData(pilotName)
+        // külön tesztbe tenni ` `  elnevezéssel
     }
 }
