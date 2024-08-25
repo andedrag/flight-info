@@ -15,6 +15,6 @@ data class Flight(
 ) {
 
     override fun toString(): String {
-        return "" + id
+        return "" + countryFrom + " - " + countryTo
     }
 }
