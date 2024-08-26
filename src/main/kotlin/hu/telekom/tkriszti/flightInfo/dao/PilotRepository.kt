@@ -7,7 +7,7 @@ import org.springframework.data.mongodb.repository.Query
 import org.springframework.stereotype.Repository
 
 @Repository
-interface DataAccess : MongoRepository<Pilot, String> {
+interface PilotRepository : MongoRepository<Pilot, String> {
     fun findByName(pilotName: String) : Set<Pilot>
 
       @Query("{ 'pilot1Id': ?0, 'pilot2Id': ?0 }")

@@ -1,6 +1,6 @@
 package hu.telekom.tkriszti.flightInfo.service
 
-import hu.telekom.tkriszti.flightInfo.dao.DataAccess
+import hu.telekom.tkriszti.flightInfo.dao.PilotRepository
 import hu.telekom.tkriszti.flightInfo.dto.ResultDTO
 import hu.telekom.tkriszti.flightInfo.model.Flight
 import org.springframework.beans.factory.annotation.Autowired
@@ -10,7 +10,7 @@ import java.util.*
 import java.util.stream.Collectors
 
 @Service
-class PilotInfoServiceDbImpl (@Autowired private val dao: DataAccess) : PilotInfoService {
+class PilotInfoServiceDbImpl (@Autowired private val dao: PilotRepository) : PilotInfoService {
     @Throws(SQLException::class)
     override fun getPilotData(pilotName: String): Set<ResultDTO?> {
         val relevantPilotData: MutableSet<ResultDTO?> = HashSet()
