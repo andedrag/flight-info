@@ -18,40 +18,55 @@ class AppControllerJsonTest {
     @Autowired
     private lateinit var mockMvc: MockMvc
 
-   // private val pilotInfoService = mock(PilotInfoService::class.java)
-   @MockBean
-   private lateinit var pilotInfoService: PilotInfoService
+    @MockBean
+    private lateinit var pilotInfoService: PilotInfoService
+
+    private val pilotName = "KovacsPeti"
+    private val mockPilotData = setOf(
+        ResultDTO(
+            pilotName = "KovácsPeti",
+            pilotLicenceYear = 2010,
+            flightsByPilot = listOf("000", "002"),
+            totalFlightTime = 720
+        )
+    )
 
     @Test
-    fun `getPilotData should return proper pilot data` () {
-        val pilotName = "KovacsPeti"
-        val mockPilotData = setOf(
-            ResultDTO(
-                pilotName = "KovacsPeti",
-                pilotLicenceYear = 1919,
-                flightsByPilot = listOf(6, 7),
-                totalFlightTime = 444
-            )
-        )
-        `when` (pilotInfoService.getPilotData(pilotName)).thenReturn(mockPilotData)
+    fun `getPilotData should return proper pilot data`() {
 
-        mockMvc.perform(get("/pilot/json")
-            .param("name", pilotName))
+        `when`(pilotInfoService.getPilotData(pilotName)).thenReturn(mockPilotData)
+
+        mockMvc.perform(
+            get("/pilot/json")
+                .param("name", pilotName)
+        )
             .andExpect(status().isOk)
-            .andExpect(content().json(
-                """
+            .andExpect(
+                content().json(
+                    """
             [
                 {
-                    "pilotName": "KovacsPeti",
-                    "pilotLicenceYear": 1919,
-                    "flightsByPilot": [6, 7],
-                    "totalFlightTime": 444
+                    "pilotName": "KovácsPeti",
+                    "pilotLicenceYear": 2010,
+                    "flightsByPilot": ["000", "002"],
+                    "totalFlightTime": 720
                 }
             ]
             """.trimIndent()
-            ))
+                )
+            )
+    }
+
+    @Test
+    fun `getPilotData should call pilotInfoService exactly once`() {
+        `when`(pilotInfoService.getPilotData(pilotName)).thenReturn(mockPilotData)
+
+        mockMvc.perform(
+            get("/pilot/json")
+                .param("name", pilotName)
+        )
+            .andExpect(status().isOk)
 
         verify(pilotInfoService, times(1)).getPilotData(pilotName)
-        // külön tesztbe tenni ` `  elnevezéssel
     }
 }
