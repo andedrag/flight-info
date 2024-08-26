@@ -1,6 +1,6 @@
 package hu.telekom.tkriszti.flightInfo.controller
 
-import hu.telekom.tkriszti.flightInfo.dao.DataAccess
+import hu.telekom.tkriszti.flightInfo.dao.PilotRepository
 import hu.telekom.tkriszti.flightInfo.dto.ResultDTO
 import hu.telekom.tkriszti.flightInfo.model.Flight
 import hu.telekom.tkriszti.flightInfo.model.Pilot
@@ -14,26 +14,26 @@ import java.time.LocalDate
 
 class PilotInfoServiceDbImplTest {
 
-    private val dao = mock(DataAccess::class.java)
+    private val dao = mock(PilotRepository::class.java)
     private val service = PilotInfoServiceDbImpl(dao)
 
     @Test
-    fun testGetPilotData() { // létező pilótára adjon vissza pilóta adatot
+    fun `should return pilot data if pilot exists`() {
         val pilotName = "KovacsPisti"
-        val pilotId = 4
+        val pilotId = "4"
         val licenseYear = 1982
         val birthDate = LocalDate.of(1956,4,4)
         val phoneNr = "0036704567891"
         //val flightTime = 556
-        val flight1 = Flight(1, pilotId, 0, 1, 2, 256)
-        val flight2 = Flight(2, pilotId, 0, 3, 4, 300)
+        val flight1 = Flight("1", pilotId, "0", "1", "2", 256)
+        val flight2 = Flight("2", pilotId, "0", "3", "4", 300)
         val expectedFlights = setOf(flight1, flight2)
-        val expectedPilot = Pilot(pilotId, pilotName, birthDate, phoneNr, licenseYear)
+        val expectedPilot = Pilot(pilotId, 0, pilotName, birthDate, phoneNr, licenseYear)
        // val expectedFlight = Flight(1, pilotId, flightTime)
-        val expectedResultDTO = ResultDTO(pilotName, licenseYear, listOf(1,2), 556)
+        val expectedResultDTO = ResultDTO(pilotName, licenseYear, listOf("1","2"), 556)
 
-        `when`(dao.getPilotByName(pilotName)).thenReturn(setOf(expectedPilot))
-        `when`(dao.getFlightsByPilotId(pilotId)).thenReturn(expectedFlights)
+        `when`(dao.findByName(pilotName)).thenReturn(setOf(expectedPilot))
+        `when`(dao.findByPilot1IdOrPilot2Id(pilotId)).thenReturn(expectedFlights)
 
         val actualPilotData = service.getPilotData(pilotName)
 
@@ -41,9 +41,9 @@ class PilotInfoServiceDbImplTest {
         // egyező adatok, mégsem equals. Át kellene írni a ResultDTO equals()-át?
     }
     @Test
-    fun testGetPilotDataIfEmpty() {
+    fun `should return empty set when pilot does not exist`() {
         val pilotName = "Nem Létező Pilot"
-        `when`(dao.getPilotByName(pilotName)).thenReturn(emptySet())
+        `when`(dao.findByName(pilotName)).thenReturn(emptySet())
         val actualPilotData = service.getPilotData(pilotName)
         assertTrue(actualPilotData.isEmpty())
     }
