@@ -8,12 +8,16 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 import java.sql.SQLException
 import java.util.*
+import org.slf4j.LoggerFactory
 
 @Service
 class PilotInfoServiceDbImpl(
     @Autowired private val pilotRepo: PilotRepository,
     @Autowired private val flightRepo: FlightRepository
 ) : PilotInfoService {
+
+    private val logger = LoggerFactory.getLogger(PilotInfoServiceDbImpl::class.java)
+
     @Throws(SQLException::class)
     override fun getPilotData(pilotName: String): Set<ResultDTO?> {
         val relevantPilotData: MutableSet<ResultDTO?> = HashSet()
@@ -27,6 +31,7 @@ class PilotInfoServiceDbImpl(
                 ResultDTO(pilotName, licenseYear, flightIds, sumOfFlightTime)
             )
         }
+        logger.info("Returning pilot data based on received pilot name...")
         return relevantPilotData
     }
 
