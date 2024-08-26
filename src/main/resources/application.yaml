@@ -4,13 +4,10 @@ spring:
     data:
         mongodb:
             uri: mongodb://localhost:27017/flightdb
-    #datasource:
-    #    url: jdbc:mysql://localhost:3307/flightdb
-    #    username: root
-    #    password: root
+
 management:
     server:
-        port: ${MANAGEMENT_PORT:9000}
+        port: ${MANAGEMENT_PORT:9000} # http://localhost:9000/actuator/health
     endpoints:
         web:
             exposure:
