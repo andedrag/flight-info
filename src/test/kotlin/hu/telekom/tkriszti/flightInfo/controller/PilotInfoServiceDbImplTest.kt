@@ -1,5 +1,6 @@
 package hu.telekom.tkriszti.flightInfo.controller
 
+import hu.telekom.tkriszti.flightInfo.dao.FlightRepository
 import hu.telekom.tkriszti.flightInfo.dao.PilotRepository
 import hu.telekom.tkriszti.flightInfo.dto.ResultDTO
 import hu.telekom.tkriszti.flightInfo.model.Flight
@@ -14,36 +15,38 @@ import java.time.LocalDate
 
 class PilotInfoServiceDbImplTest {
 
-    private val dao = mock(PilotRepository::class.java)
-    private val service = PilotInfoServiceDbImpl(dao)
+    private val pilotRepo = mock(PilotRepository::class.java)
+    private val flightRepo = mock(FlightRepository::class.java)
+    private val service = PilotInfoServiceDbImpl(pilotRepo, flightRepo)
 
     @Test
     fun `should return pilot data if pilot exists`() {
-        val pilotName = "KovacsPisti"
-        val pilotId = "4"
-        val licenseYear = 1982
-        val birthDate = LocalDate.of(1956,4,4)
-        val phoneNr = "0036704567891"
+        val pilotName = "KovácsPisti"
+        val pilotId = "0"
+        val licenseYear = 2010
+        val birthDate = LocalDate.of(1990, 1, 1)
+        val phoneNr = "+36201234567"
         //val flightTime = 556
-        val flight1 = Flight("1", pilotId, "0", "1", "2", 256)
-        val flight2 = Flight("2", pilotId, "0", "3", "4", 300)
+        val flight1 = Flight("000", pilotId, "1", "Magyarország", "Németország", 120)
+        val flight2 = Flight("002", "2", pilotId, "EgyesültÁllamok", "Magyarország", 600)
         val expectedFlights = setOf(flight1, flight2)
         val expectedPilot = Pilot(pilotId, 0, pilotName, birthDate, phoneNr, licenseYear)
-       // val expectedFlight = Flight(1, pilotId, flightTime)
-        val expectedResultDTO = ResultDTO(pilotName, licenseYear, listOf("1","2"), 556)
+        // val expectedFlight = Flight(1, pilotId, flightTime)
+        val expectedResultDTO = ResultDTO(pilotName, licenseYear, listOf("000", "002"), 720)
+        val expectedSet = hashSetOf(expectedResultDTO) // ez csak a JUnit miatt kell, mert ha csak 1 találat van, akkor Collectionssingletonként értlemezi, és el fog térni a hashsettől
 
-        `when`(dao.findByName(pilotName)).thenReturn(setOf(expectedPilot))
-        `when`(dao.findByPilot1IdOrPilot2Id(pilotId)).thenReturn(expectedFlights)
+        `when`(pilotRepo.findByName(pilotName)).thenReturn(setOf(expectedPilot))
+        `when`(flightRepo.findByPilot1IdOrPilot2Id(pilotId)).thenReturn(expectedFlights)
 
         val actualPilotData = service.getPilotData(pilotName)
 
-        assertEquals(setOf(expectedResultDTO), actualPilotData)
-        // egyező adatok, mégsem equals. Át kellene írni a ResultDTO equals()-át?
+        assertEquals(expectedSet, actualPilotData)
     }
+
     @Test
     fun `should return empty set when pilot does not exist`() {
         val pilotName = "Nem Létező Pilot"
-        `when`(dao.findByName(pilotName)).thenReturn(emptySet())
+        `when`(pilotRepo.findByName(pilotName)).thenReturn(emptySet())
         val actualPilotData = service.getPilotData(pilotName)
         assertTrue(actualPilotData.isEmpty())
     }

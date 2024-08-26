@@ -23,8 +23,9 @@
             <td th:text="${pilot.pilotName}"></td>
             <td th:text="${pilot.pilotLicenceYear}"></td>
             <td>
-                <span th:each="flightId : ${pilot.flightsByPilot}">
+                <span th:each="flightId, iterStat : ${pilot.flightsByPilot}">
                     <span th:text="${flightId}"></span>
+                    <span th:if="${!iterStat.last}">, </span>
                 </span>
             </td>
             <td th:text="${pilot.totalFlightTime}"></td>

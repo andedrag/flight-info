@@ -24,10 +24,10 @@ class AppControllerJsonTest {
     private val pilotName = "KovacsPeti"
     private val mockPilotData = setOf(
         ResultDTO(
-            pilotName = "KovacsPeti",
-            pilotLicenceYear = 1919,
-            flightsByPilot = listOf("6", "7"),
-            totalFlightTime = 444
+            pilotName = "KovácsPeti",
+            pilotLicenceYear = 2010,
+            flightsByPilot = listOf("000", "002"),
+            totalFlightTime = 720
         )
     )
 
@@ -46,10 +46,10 @@ class AppControllerJsonTest {
                     """
             [
                 {
-                    "pilotName": "KovacsPeti",
-                    "pilotLicenceYear": 1919,
-                    "flightsByPilot": [6, 7],
-                    "totalFlightTime": 444
+                    "pilotName": "KovácsPeti",
+                    "pilotLicenceYear": 2010,
+                    "flightsByPilot": ["000", "002"],
+                    "totalFlightTime": 720
                 }
             ]
             """.trimIndent()
